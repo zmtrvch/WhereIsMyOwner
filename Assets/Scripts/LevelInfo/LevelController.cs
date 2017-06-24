@@ -8,9 +8,9 @@ public class LevelController : MonoBehaviour {
 	//префабы панелек
 	public GameObject winPrefab;
 	public GameObject losePrefab;
-
+	int foodNumber = 0;
 	int lifesNumber = 3;
-
+	public int maxFood = 0;
 	public static LevelController current;
 	void Awake() {
 		current = this;
@@ -37,6 +37,18 @@ public class LevelController : MonoBehaviour {
 		if (lifesNumber < 3) lifesNumber++;
 
 	}
+	public void addFood(){
+		foodNumber++;
+
+	}
+	public int getFood() {
+		return foodNumber;
+	}
+	public int getMaxFoodNumber() {
+
+		return maxFood;
+	}
+
 	void decreaseLifeNumber() {
 		if (lifesNumber <= 0) {
 			//создаем LosePanel
