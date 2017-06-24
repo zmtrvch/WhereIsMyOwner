@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
 	
+	//префабы панелек
+	public GameObject winPrefab;
+	public GameObject losePrefab;
 
 	int lifesNumber = 3;
 
@@ -37,10 +40,26 @@ public class LevelController : MonoBehaviour {
 	void decreaseLifeNumber() {
 		if (lifesNumber <= 0) {
 			//создаем LosePanel
+			createLosePanel();
 		} else {
 			lifesNumber--;
 		}
 	}
-
+   
+	//создаем LosePanel
+	void createLosePanel(){
+		GameObject parent = UICamera.first.transform.parent.gameObject;
+		//Створити Prefab
+		GameObject obj = NGUITools.AddChild (parent, losePrefab);
+		LosePanel popup = obj.GetComponent<LosePanel>();
+		Time.timeScale = 0;
+	}
+	//создаем WinPanel
+	void createWinPanel(){
+		GameObject parent = UICamera.first.transform.parent.gameObject;
+		GameObject obj = NGUITools.AddChild (parent, winPrefab);
+		WinPanel popup = obj.GetComponent<WinPanel>();
+		Time.timeScale = 0;
+	}
 
 }
