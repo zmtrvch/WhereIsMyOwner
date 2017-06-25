@@ -169,5 +169,11 @@ public class Cat : MonoBehaviour {
 		public void setSoundOn(){
 			sound = true;
 		}
+	public void bombCat(){
+		
 
+		Die ();
+
+
+	}
 	}
