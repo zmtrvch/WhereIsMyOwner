@@ -146,12 +146,12 @@ public class Cat : MonoBehaviour {
 			else if (this.health == 0)
 			{
 			Die ();
-
 			}
 		}
 		
 		public void Die(){
 			StartCoroutine (dieAnimation(0.5f));
+
 
 		}
 		public IEnumerator dieAnimation (float time){
