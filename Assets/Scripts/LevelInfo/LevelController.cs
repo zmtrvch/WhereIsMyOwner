@@ -8,12 +8,25 @@ public class LevelController : MonoBehaviour {
 	//префабы панелек
 	public GameObject winPrefab;
 	public GameObject losePrefab;
+	public GameObject settingsPrefab;
 	int foodNumber = 0;
 	int lifesNumber = 3;
 	public int maxFood = 0;
 	public static LevelController current;
+	public AudioClip music = null;
+	AudioSource musicSource = null;
+	public MyButton pause;
+
 	void Awake() {
 		current = this;
+		//sounds
+		musicSource = gameObject.AddComponent<AudioSource>();
+		musicSource.clip = music;
+		musicSource.loop = true;
+		musicSource.Play ();
+		this.pause.signalOnClick.AddListener (this.showSettings);
+
+
 	}
 
 
@@ -27,7 +40,16 @@ public class LevelController : MonoBehaviour {
 		cat.transform.position = this.startingPosition;
 	}
 
+	//музика
+	public void setMusicOff(){
 
+		musicSource.Pause ();
+	}
+
+	public void setMusicOn(){
+
+		musicSource.Play ();
+	}
 	//життя
 	public int getLifes() {
 		return lifesNumber;
@@ -73,5 +95,13 @@ public class LevelController : MonoBehaviour {
 		WinPanel popup = obj.GetComponent<WinPanel>();
 		Time.timeScale = 0;
 	}
+
+	//settings
+	void showSettings() {
+		GameObject parent = UICamera.first.transform.parent.gameObject;
+		GameObject obj = NGUITools.AddChild (parent, settingsPrefab);
+		Settings popup = obj.GetComponent<Settings>();
+		Time.timeScale = 0;
+	} 
 
 }
