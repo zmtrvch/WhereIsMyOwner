@@ -145,13 +145,13 @@ public class Cat : MonoBehaviour {
 			}
 			else if (this.health == 0)
 			{
-				LevelController.current.onCatDeath(this);
+			Die ();
 
 			}
 		}
 		
 		public void Die(){
-			StartCoroutine (dieAnimation(2.0f));
+			StartCoroutine (dieAnimation(0.5f));
 
 		}
 		public IEnumerator dieAnimation (float time){

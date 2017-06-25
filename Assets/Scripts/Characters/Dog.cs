@@ -83,13 +83,13 @@ public class Dog : MonoBehaviour {
 	}
 
 
-	private IEnumerator attack(Cat rabit)
+	private IEnumerator attack(Cat cat)
 	{ 
 		Animator animator = GetComponent<Animator>();
 
 		playMusicOnAttack ();
 		animator.SetBool("attack", true);
-		rabit.removeHealth(1);
+		cat.removeHealth(1);
 		yield return new WaitForSeconds(0.2f);
 
 		animator.SetBool("attack", false);       
@@ -99,20 +99,20 @@ public class Dog : MonoBehaviour {
 	{
 		if (currentMode != Mode.die)
 		{
-			Cat rabit = collision.gameObject.GetComponent<Cat>();
-			if (rabit != null)
+			Cat cat = collision.gameObject.GetComponent<Cat>();
+			if (cat != null)
 			{
-				Vector3 rabit_pos = Cat.current.transform.position;
+				Vector3 cat_position = Cat.current.transform.position;
 				Vector3 my_pos = this.transform.position;
 				currentMode = Mode.attack;
 
-				if (currentMode == Mode.attack && Mathf.Abs(rabit_pos.y - my_pos.y) < 1.0f)
+				if (currentMode == Mode.attack && Mathf.Abs(cat_position.y - my_pos.y) < 1.0f)
 				{
 					
-						StartCoroutine (attack (rabit));
+						StartCoroutine (attack (cat));
 
 				}
-				else if (currentMode == Mode.attack && Mathf.Abs(rabit_pos.y - my_pos.y) > 1.0f)
+				else if (currentMode == Mode.attack && Mathf.Abs(cat_position.y - my_pos.y) > 1.0f)
 				{
 					currentMode = Mode.die;
 					playMusicOnDeath ();
@@ -160,17 +160,16 @@ public class Dog : MonoBehaviour {
 
 	private float getDirection()
 	{
-		Vector3 rabit_pos = Cat.current.transform.position;
+		Vector3 cat_position = Cat.current.transform.position;
 		Vector3 my_pos = this.transform.position;
 
 		if (currentMode == Mode.attack)
 		{
-			//Move towards rabit
-			if (my_pos.x - rabit_pos.x < -1)
+		if (my_pos.x - cat_position.x < -1)
 			{
 				return 1;
 			}
-			else if (my_pos.x - rabit_pos.x > 1)
+			else if (my_pos.x - cat_position.x > 1)
 			{
 				return -1;
 			}
@@ -199,7 +198,7 @@ public class Dog : MonoBehaviour {
 
 			if (myBody != null) Destroy(myBody);
 
-			yield return new WaitForSeconds(1.0f);
+			yield return new WaitForSeconds(1.5f);
 
 			animator.SetBool("die", false);
 

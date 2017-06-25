@@ -244,7 +244,7 @@ public class Squirrel : MonoBehaviour {
 
 			if (myBody != null) Destroy(myBody);
 
-			yield return new WaitForSeconds(1.5f);
+			yield return new WaitForSeconds(1.0f);
 
 			animator.SetBool("die", false);
 			Destroy(this.gameObject);
