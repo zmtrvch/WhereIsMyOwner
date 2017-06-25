@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
 
-	public MainCamera cat;
+	public Cat cat;
 
 	void Update()
 	{
