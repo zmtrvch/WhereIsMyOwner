@@ -9,6 +9,7 @@ public class LevelController : MonoBehaviour {
 	public GameObject winPrefab;
 	public GameObject losePrefab;
 	public GameObject settingsPrefab;
+	int mousesNumber=0;
 	int foodNumber = 0;
 	int lifesNumber = 3;
 	public int maxFood = 0;
@@ -29,7 +30,13 @@ public class LevelController : MonoBehaviour {
 
 	}
 
-
+	public void addMouses(int number)
+	{
+		mousesNumber ++;
+	}
+	public int getMouses() {
+		return mousesNumber;
+	}
 	Vector3 startingPosition;
 	public void setStartPosition(Vector3 pos) {
 		this.startingPosition = pos;
