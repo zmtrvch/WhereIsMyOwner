@@ -30,14 +30,7 @@ public class LevelController : MonoBehaviour {
 
 
 	}
-
-	void Start(){
-		PlayerPrefs.SetInt ("music",2);
-		Debug.Log (PlayerPrefs.GetInt("music"));
-
-		if(PlayerPrefs.GetInt("music")!=0){
-			musicSource.Play ();}
-	}
+		
 
 
 	public void addMouses(int number)
@@ -59,18 +52,14 @@ public class LevelController : MonoBehaviour {
 
 	//музика
 	public void setMusicOff(){
-		//if (PlayerPrefs.GetInt ("music") != 0) {
 			musicSource.Pause ();
-			PlayerPrefs.SetInt ("music", 0);
-			PlayerPrefs.Save ();
-		//}
+			
 	}
 
 	public void setMusicOn(){
-		if(PlayerPrefs.GetInt("music")!=0){
+		
 		musicSource.Play ();
-		PlayerPrefs.SetInt ("music",1);
-			PlayerPrefs.Save ();}
+
 	}
 	//життя
 	public int getLifes() {
