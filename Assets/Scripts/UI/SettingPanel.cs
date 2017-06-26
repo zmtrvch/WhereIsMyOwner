@@ -11,25 +11,30 @@ public class SettingPanel : MonoBehaviour {
 	public MyButton replayButton;
 	public MyButton backgroundButton;
 
+	public static bool sound = true;
+
 	void Start () {
 		
 		closeButton.signalOnClick.AddListener (this.close);
 		menuButton.signalOnClick.AddListener (this.menu);
 
-			replayButton.signalOnClick.AddListener (this.replay);
+	    replayButton.signalOnClick.AddListener (this.replay);
 		backgroundButton.signalOnClick.AddListener (this.close);
 	
 	}
 	void replay(){
+
 		if (replayButton.GetComponent<UIButton> ().normalSprite2D.name.Equals ("music-on")) {
 			replayButton.GetComponent<UIButton> ().normalSprite2D = musicOff;
 			Debug.Log ("off");
+			LevelController.current.setMusicOff ();
 		}
 		else{
 			replayButton.GetComponent<UIButton> ().normalSprite2D=musicOn;
 			Debug.Log ("on");
+			LevelController.current.setMusicOn ();
 		}
-		//SoundController.current.changeMusic ();
+
 	}
 	void close(){
 		Destroy (this.gameObject);
