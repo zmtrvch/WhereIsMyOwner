@@ -17,7 +17,12 @@ public class SettingPanel : MonoBehaviour {
 		
 		closeButton.signalOnClick.AddListener (this.close);
 		menuButton.signalOnClick.AddListener (this.menu);
+		if (LevelController.isMusicOn == true) {
+			replayButton.GetComponent<UIButton> ().normalSprite2D = musicOn;
+		} else {
+			replayButton.GetComponent<UIButton> ().normalSprite2D = musicOff;
 
+		}
 	    replayButton.signalOnClick.AddListener (this.replay);
 		backgroundButton.signalOnClick.AddListener (this.close);
 	

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
-	
+
 	//префабы панелек
 	public GameObject winPrefab;
 	public GameObject losePrefab;
@@ -14,23 +14,45 @@ public class LevelController : MonoBehaviour {
 	int lifesNumber = 3;
 	public int maxFood = 0;
 	public static LevelController current;
+	public static bool isMusicOn;
 	public AudioClip music = null;
 	AudioSource musicSource = null;
 	public MyButton pause;
 
 	void Awake() {
 		current = this;
+
 		//sounds
 		musicSource = gameObject.AddComponent<AudioSource>();
 		musicSource.clip = music;
-		musicSource.loop = true;
+		//musicSource.loop = true;
+
+
 
 
 		this.pause.signalOnClick.AddListener (this.showSettings);
 
 
 	}
-		
+
+	void Start(){
+		int SoundOn = PlayerPrefs.GetInt ("isMusicOn", 0);
+		Debug.Log ("son" +SoundOn);
+		if (SoundOn == 0){
+			setMusicOff();
+			Debug.Log ("son OFF");
+		}
+		else{
+			setMusicOn();
+			Debug.Log ("son ON");}
+
+		//PlayerPrefs.SetInt ("isMusicOn",2);
+		//Debug.Log (PlayerPrefs.GetInt("music"));
+
+		//if(PlayerPrefs.GetInt("music")!=0){
+		//	musicSource.Play ();}
+
+	}
 
 
 	public void addMouses(int number)
@@ -52,14 +74,19 @@ public class LevelController : MonoBehaviour {
 
 	//музика
 	public void setMusicOff(){
-			musicSource.Pause ();
-			
+		isMusicOn = false;
+		musicSource.Stop ();
+		PlayerPrefs.SetInt ("isMusicOn", 0);
+		PlayerPrefs.Save ();
+
 	}
 
 	public void setMusicOn(){
-		
-		musicSource.Play ();
+		isMusicOn = true;
 
+		musicSource.Play ();
+		PlayerPrefs.SetInt ("isMusicOn",1);
+		PlayerPrefs.Save ();
 	}
 	//життя
 	public int getLifes() {
@@ -90,29 +117,29 @@ public class LevelController : MonoBehaviour {
 			lifesNumber--;
 		}
 	}
-   
+
 	//создаем LosePanel
-	void createLosePanel(){
+	public	void createLosePanel(){
 		GameObject parent = UICamera.first.transform.parent.gameObject;
 		//Створити Prefab
 		GameObject obj = NGUITools.AddChild (parent, losePrefab);
 		LosePanel popup = obj.GetComponent<LosePanel>();
-		Time.timeScale = 0;
+		//	Time.timeScale = 0;
 	}
 	//создаем WinPanel
-	void createWinPanel(){
+	public void createWinPanel(){
 		GameObject parent = UICamera.first.transform.parent.gameObject;
 		GameObject obj = NGUITools.AddChild (parent, winPrefab);
 		WinPanel popup = obj.GetComponent<WinPanel>();
-		Time.timeScale = 0;
+		//	Time.timeScale = 0;
 	}
 
 	//settings
-	void showSettings() {
+	public	void showSettings() {
 		GameObject parent = UICamera.first.transform.parent.gameObject;
 		GameObject obj = NGUITools.AddChild (parent, settingsPrefab);
 		SettingPanel popup = obj.GetComponent<SettingPanel>();
-		Time.timeScale = 0;
+		//	Time.timeScale = 0;
 	} 
 
 }
