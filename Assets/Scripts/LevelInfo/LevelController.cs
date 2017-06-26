@@ -15,19 +15,26 @@ public class LevelController : MonoBehaviour {
 	public int maxFood = 0;
 	public static LevelController current;
 	public static bool isMusicOn;
+	public static bool isLevel1Completed;
+	public static bool isLevel2Completed;
+
+	public static int collectedMouses;
 	public AudioClip music = null;
 	AudioSource musicSource = null;
 	public MyButton pause;
-
+	int level1Copl ;
 	void Awake() {
 		current = this;
-
 		//sounds
 		musicSource = gameObject.AddComponent<AudioSource>();
 		musicSource.clip = music;
 		//musicSource.loop = true;
 
-
+		int Level1Complated = PlayerPrefs.GetInt ("isLevel1Completed", 0);
+		if (Level1Complated == 1)
+			isLevel1Completed = true;
+		else
+			isLevel1Completed = false;
 
 
 		this.pause.signalOnClick.AddListener (this.showSettings);
@@ -45,6 +52,9 @@ public class LevelController : MonoBehaviour {
 		else{
 			setMusicOn();
 			Debug.Log ("son ON");}
+		collectedMouses = PlayerPrefs.GetInt ("collectedMouses",0);
+		//Debug.Log ("collectedMouses" +collectedMouses );
+		//level1Copl = PlayerPrefs.GetInt ("isLevel1Completed", 0);
 
 		//PlayerPrefs.SetInt ("isMusicOn",2);
 		//Debug.Log (PlayerPrefs.GetInt("music"));
@@ -58,6 +68,8 @@ public class LevelController : MonoBehaviour {
 	public void addMouses(int number)
 	{
 		mousesNumber ++;
+		PlayerPrefs.SetInt ("collectedMouses",mousesNumber );
+		PlayerPrefs.Save ();
 	}
 	public int getMouses() {
 		return mousesNumber;
@@ -131,6 +143,9 @@ public class LevelController : MonoBehaviour {
 		GameObject parent = UICamera.first.transform.parent.gameObject;
 		GameObject obj = NGUITools.AddChild (parent, winPrefab);
 		WinPanel popup = obj.GetComponent<WinPanel>();
+		collectedMouses += mousesNumber;
+		PlayerPrefs.SetInt ("collectedMouses",collectedMouses);
+		PlayerPrefs.Save ();
 		//	Time.timeScale = 0;
 	}
 

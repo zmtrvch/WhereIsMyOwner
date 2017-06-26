@@ -10,14 +10,15 @@ public class Luggage2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start(){
-		//if (LevelController.isLevel1Complated == true)
-		//lug.sprite= openlug;
-		//else
-		lug.sprite = closelug;
+		if (LevelController.isLevel1Completed == true)
+			lug.sprite= openlug;
+		else
+			lug.sprite = closelug;
 	}
 	void OnTriggerEnter2D(Collider2D collider) {
-		SceneManager.LoadScene ("Level2");
-		openlug = closelug;
+		if (LevelController.isLevel1Completed == true)
+			SceneManager.LoadScene ("Level2");
+		//openlug = closelug;
 
 	}
 }

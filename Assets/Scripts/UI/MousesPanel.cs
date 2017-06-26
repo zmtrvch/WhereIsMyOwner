@@ -8,17 +8,18 @@ public class MousesPanel : MonoBehaviour {
 	public int numberOfNulls; 
 	public UILabel label;
 	int currentNumber;
-
+	int number=0;
 
 	void FixedUpdate () {
-		//if (SceneManager.GetActiveScene ().name != "Levels") {
+		if (SceneManager.GetActiveScene ().name != "Levels") {
 			currentNumber = LevelController.current.getMouses ();
 			Debug.Log (currentNumber);
 			writeCoins (currentNumber);
-		//} else {
-		//	double number = (LevelController.collectedMouses- LevelController.collectedMouses / 2);	
-		//	label.text = "000" +number.ToString();
-		//}
+		} else {
+			number = (LevelController.collectedMouses);	
+			Debug.Log ("number" + number);
+			label.text = "000" +number.ToString();
+		}
 
 	}
 

@@ -5,20 +5,21 @@ using UnityEngine.SceneManagement;
 
 
 public class WinPanel : MonoBehaviour {
-	
+
 	public MyButton closeButton;
 	public MyButton blackBackground;
 	public MyButton nextButton;
 	public MyButton replayButton;
 
-
+	public UILabel mauseLabel;
 
 	void Start () {
-		
+
 		closeButton.signalOnClick.AddListener (this.close);
 		blackBackground.signalOnClick.AddListener (this.close);
 		nextButton.signalOnClick.AddListener (this.next);
 		replayButton.signalOnClick.AddListener (this.replay);
+		setMouseLabel ();
 	}
 
 
@@ -38,7 +39,9 @@ public class WinPanel : MonoBehaviour {
 		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 
 	}
-
+	public void setMouseLabel() {
+		mauseLabel.text ="+"+ LevelController.current.getMouses().ToString();
+	}
 
 
 }
