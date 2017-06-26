@@ -30,6 +30,7 @@ public class LevelController : MonoBehaviour {
 
 	}
 
+
 	public void addMouses(int number)
 	{
 		mousesNumber ++;
@@ -107,7 +108,7 @@ public class LevelController : MonoBehaviour {
 	void showSettings() {
 		GameObject parent = UICamera.first.transform.parent.gameObject;
 		GameObject obj = NGUITools.AddChild (parent, settingsPrefab);
-		Settings popup = obj.GetComponent<Settings>();
+		SettingPanel popup = obj.GetComponent<SettingPanel>();
 		Time.timeScale = 0;
 	} 
 
