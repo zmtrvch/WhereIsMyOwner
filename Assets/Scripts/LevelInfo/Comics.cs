@@ -7,7 +7,7 @@ public class Comics : MonoBehaviour {
 
 
 	void Start () {
-		StartCoroutine (comics(2.0f));
+		StartCoroutine (comics(2.7f));
 		
 	}
 	
